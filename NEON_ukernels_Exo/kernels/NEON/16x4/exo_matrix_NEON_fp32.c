@@ -1,0 +1,205 @@
+#include "exo_matrix_NEON_fp32.h"
+
+ukrFunction**** allocateMatrix() {
+    ukrFunction**** matrix = (ukrFunction****)malloc(17 * sizeof(ukrFunction***));
+    for (int i = 0; i < 17; i++) {
+        matrix[i] = (ukrFunction***)malloc(5 * sizeof(ukrFunction**));
+        for (int j = 0; j < 5; j++) {
+            matrix[i][j] = (ukrFunction**)malloc(2 * sizeof(ukrFunction*));
+            for (int b = 0; b < 2; b++) {
+                matrix[i][j][b] = (ukrFunction*)malloc(1 * sizeof(ukrFunction));
+            }
+        }
+    }
+    return matrix;
+}
+
+
+void fillMatrix(ukrFunction**** matrix) {
+    *matrix[0][0][0] = 	(ukrFunction)NULL;
+    *matrix[0][0][1] = 	(ukrFunction)NULL;
+    *matrix[0][1][0] = 	(ukrFunction)NULL;
+    *matrix[0][1][1] = 	(ukrFunction)NULL;
+    *matrix[0][2][0] = 	(ukrFunction)NULL;
+    *matrix[0][2][1] = 	(ukrFunction)NULL;
+    *matrix[0][3][0] = 	(ukrFunction)NULL;
+    *matrix[0][3][1] = 	(ukrFunction)NULL;
+    *matrix[0][4][0] = 	(ukrFunction)NULL;
+    *matrix[0][4][1] = 	(ukrFunction)NULL;
+    *matrix[1][0][0] = 	(ukrFunction)NULL;
+    *matrix[1][0][1] = 	(ukrFunction)NULL;
+    *matrix[1][1][0] = 	(ukrFunction)gemm_NEON_1x1_b0_col_fp32;
+    *matrix[1][1][1] = 	(ukrFunction)gemm_NEON_1x1_b1_col_fp32;
+    *matrix[1][2][0] = 	(ukrFunction)gemm_NEON_1x2_b0_col_fp32;
+    *matrix[1][2][1] = 	(ukrFunction)gemm_NEON_1x2_b1_col_fp32;
+    *matrix[1][3][0] = 	(ukrFunction)gemm_NEON_1x3_b0_col_fp32;
+    *matrix[1][3][1] = 	(ukrFunction)gemm_NEON_1x3_b1_col_fp32;
+    *matrix[1][4][0] = 	(ukrFunction)gemm_NEON_1x4_b0_col_fp32;
+    *matrix[1][4][1] = 	(ukrFunction)gemm_NEON_1x4_b1_col_fp32;
+    *matrix[2][0][0] = 	(ukrFunction)NULL;
+    *matrix[2][0][1] = 	(ukrFunction)NULL;
+    *matrix[2][1][0] = 	(ukrFunction)gemm_NEON_2x1_b0_col_fp32;
+    *matrix[2][1][1] = 	(ukrFunction)gemm_NEON_2x1_b1_col_fp32;
+    *matrix[2][2][0] = 	(ukrFunction)gemm_NEON_2x2_b0_col_fp32;
+    *matrix[2][2][1] = 	(ukrFunction)gemm_NEON_2x2_b1_col_fp32;
+    *matrix[2][3][0] = 	(ukrFunction)gemm_NEON_2x3_b0_col_fp32;
+    *matrix[2][3][1] = 	(ukrFunction)gemm_NEON_2x3_b1_col_fp32;
+    *matrix[2][4][0] = 	(ukrFunction)gemm_NEON_2x4_b0_col_fp32;
+    *matrix[2][4][1] = 	(ukrFunction)gemm_NEON_2x4_b1_col_fp32;
+    *matrix[3][0][0] = 	(ukrFunction)NULL;
+    *matrix[3][0][1] = 	(ukrFunction)NULL;
+    *matrix[3][1][0] = 	(ukrFunction)gemm_NEON_3x1_b0_col_fp32;
+    *matrix[3][1][1] = 	(ukrFunction)gemm_NEON_3x1_b1_col_fp32;
+    *matrix[3][2][0] = 	(ukrFunction)gemm_NEON_3x2_b0_col_fp32;
+    *matrix[3][2][1] = 	(ukrFunction)gemm_NEON_3x2_b1_col_fp32;
+    *matrix[3][3][0] = 	(ukrFunction)gemm_NEON_3x3_b0_col_fp32;
+    *matrix[3][3][1] = 	(ukrFunction)gemm_NEON_3x3_b1_col_fp32;
+    *matrix[3][4][0] = 	(ukrFunction)gemm_NEON_3x4_b0_col_fp32;
+    *matrix[3][4][1] = 	(ukrFunction)gemm_NEON_3x4_b1_col_fp32;
+    *matrix[4][0][0] = 	(ukrFunction)NULL;
+    *matrix[4][0][1] = 	(ukrFunction)NULL;
+    *matrix[4][1][0] = 	(ukrFunction)gemm_NEON_4x1_b0_col_fp32;
+    *matrix[4][1][1] = 	(ukrFunction)gemm_NEON_4x1_b1_col_fp32;
+    *matrix[4][2][0] = 	(ukrFunction)gemm_NEON_4x2_b0_col_fp32;
+    *matrix[4][2][1] = 	(ukrFunction)gemm_NEON_4x2_b1_col_fp32;
+    *matrix[4][3][0] = 	(ukrFunction)gemm_NEON_4x3_b0_col_fp32;
+    *matrix[4][3][1] = 	(ukrFunction)gemm_NEON_4x3_b1_col_fp32;
+    *matrix[4][4][0] = 	(ukrFunction)gemm_NEON_4x4_b0_col_fp32;
+    *matrix[4][4][1] = 	(ukrFunction)gemm_NEON_4x4_b1_col_fp32;
+    *matrix[5][0][0] = 	(ukrFunction)NULL;
+    *matrix[5][0][1] = 	(ukrFunction)NULL;
+    *matrix[5][1][0] = 	(ukrFunction)gemm_NEON_5x1_b0_col_fp32;
+    *matrix[5][1][1] = 	(ukrFunction)gemm_NEON_5x1_b1_col_fp32;
+    *matrix[5][2][0] = 	(ukrFunction)gemm_NEON_5x2_b0_col_fp32;
+    *matrix[5][2][1] = 	(ukrFunction)gemm_NEON_5x2_b1_col_fp32;
+    *matrix[5][3][0] = 	(ukrFunction)gemm_NEON_5x3_b0_col_fp32;
+    *matrix[5][3][1] = 	(ukrFunction)gemm_NEON_5x3_b1_col_fp32;
+    *matrix[5][4][0] = 	(ukrFunction)gemm_NEON_5x4_b0_col_fp32;
+    *matrix[5][4][1] = 	(ukrFunction)gemm_NEON_5x4_b1_col_fp32;
+    *matrix[6][0][0] = 	(ukrFunction)NULL;
+    *matrix[6][0][1] = 	(ukrFunction)NULL;
+    *matrix[6][1][0] = 	(ukrFunction)gemm_NEON_6x1_b0_col_fp32;
+    *matrix[6][1][1] = 	(ukrFunction)gemm_NEON_6x1_b1_col_fp32;
+    *matrix[6][2][0] = 	(ukrFunction)gemm_NEON_6x2_b0_col_fp32;
+    *matrix[6][2][1] = 	(ukrFunction)gemm_NEON_6x2_b1_col_fp32;
+    *matrix[6][3][0] = 	(ukrFunction)gemm_NEON_6x3_b0_col_fp32;
+    *matrix[6][3][1] = 	(ukrFunction)gemm_NEON_6x3_b1_col_fp32;
+    *matrix[6][4][0] = 	(ukrFunction)gemm_NEON_6x4_b0_col_fp32;
+    *matrix[6][4][1] = 	(ukrFunction)gemm_NEON_6x4_b1_col_fp32;
+    *matrix[7][0][0] = 	(ukrFunction)NULL;
+    *matrix[7][0][1] = 	(ukrFunction)NULL;
+    *matrix[7][1][0] = 	(ukrFunction)gemm_NEON_7x1_b0_col_fp32;
+    *matrix[7][1][1] = 	(ukrFunction)gemm_NEON_7x1_b1_col_fp32;
+    *matrix[7][2][0] = 	(ukrFunction)gemm_NEON_7x2_b0_col_fp32;
+    *matrix[7][2][1] = 	(ukrFunction)gemm_NEON_7x2_b1_col_fp32;
+    *matrix[7][3][0] = 	(ukrFunction)gemm_NEON_7x3_b0_col_fp32;
+    *matrix[7][3][1] = 	(ukrFunction)gemm_NEON_7x3_b1_col_fp32;
+    *matrix[7][4][0] = 	(ukrFunction)gemm_NEON_7x4_b0_col_fp32;
+    *matrix[7][4][1] = 	(ukrFunction)gemm_NEON_7x4_b1_col_fp32;
+    *matrix[8][0][0] = 	(ukrFunction)NULL;
+    *matrix[8][0][1] = 	(ukrFunction)NULL;
+    *matrix[8][1][0] = 	(ukrFunction)gemm_NEON_8x1_b0_col_fp32;
+    *matrix[8][1][1] = 	(ukrFunction)gemm_NEON_8x1_b1_col_fp32;
+    *matrix[8][2][0] = 	(ukrFunction)gemm_NEON_8x2_b0_col_fp32;
+    *matrix[8][2][1] = 	(ukrFunction)gemm_NEON_8x2_b1_col_fp32;
+    *matrix[8][3][0] = 	(ukrFunction)gemm_NEON_8x3_b0_col_fp32;
+    *matrix[8][3][1] = 	(ukrFunction)gemm_NEON_8x3_b1_col_fp32;
+    *matrix[8][4][0] = 	(ukrFunction)gemm_NEON_8x4_b0_col_fp32;
+    *matrix[8][4][1] = 	(ukrFunction)gemm_NEON_8x4_b1_col_fp32;
+    *matrix[9][0][0] = 	(ukrFunction)NULL;
+    *matrix[9][0][1] = 	(ukrFunction)NULL;
+    *matrix[9][1][0] = 	(ukrFunction)gemm_NEON_9x1_b0_col_fp32;
+    *matrix[9][1][1] = 	(ukrFunction)gemm_NEON_9x1_b1_col_fp32;
+    *matrix[9][2][0] = 	(ukrFunction)gemm_NEON_9x2_b0_col_fp32;
+    *matrix[9][2][1] = 	(ukrFunction)gemm_NEON_9x2_b1_col_fp32;
+    *matrix[9][3][0] = 	(ukrFunction)gemm_NEON_9x3_b0_col_fp32;
+    *matrix[9][3][1] = 	(ukrFunction)gemm_NEON_9x3_b1_col_fp32;
+    *matrix[9][4][0] = 	(ukrFunction)gemm_NEON_9x4_b0_col_fp32;
+    *matrix[9][4][1] = 	(ukrFunction)gemm_NEON_9x4_b1_col_fp32;
+    *matrix[10][0][0] = 	(ukrFunction)NULL;
+    *matrix[10][0][1] = 	(ukrFunction)NULL;
+    *matrix[10][1][0] = 	(ukrFunction)gemm_NEON_10x1_b0_col_fp32;
+    *matrix[10][1][1] = 	(ukrFunction)gemm_NEON_10x1_b1_col_fp32;
+    *matrix[10][2][0] = 	(ukrFunction)gemm_NEON_10x2_b0_col_fp32;
+    *matrix[10][2][1] = 	(ukrFunction)gemm_NEON_10x2_b1_col_fp32;
+    *matrix[10][3][0] = 	(ukrFunction)gemm_NEON_10x3_b0_col_fp32;
+    *matrix[10][3][1] = 	(ukrFunction)gemm_NEON_10x3_b1_col_fp32;
+    *matrix[10][4][0] = 	(ukrFunction)gemm_NEON_10x4_b0_col_fp32;
+    *matrix[10][4][1] = 	(ukrFunction)gemm_NEON_10x4_b1_col_fp32;
+    *matrix[11][0][0] = 	(ukrFunction)NULL;
+    *matrix[11][0][1] = 	(ukrFunction)NULL;
+    *matrix[11][1][0] = 	(ukrFunction)gemm_NEON_11x1_b0_col_fp32;
+    *matrix[11][1][1] = 	(ukrFunction)gemm_NEON_11x1_b1_col_fp32;
+    *matrix[11][2][0] = 	(ukrFunction)gemm_NEON_11x2_b0_col_fp32;
+    *matrix[11][2][1] = 	(ukrFunction)gemm_NEON_11x2_b1_col_fp32;
+    *matrix[11][3][0] = 	(ukrFunction)gemm_NEON_11x3_b0_col_fp32;
+    *matrix[11][3][1] = 	(ukrFunction)gemm_NEON_11x3_b1_col_fp32;
+    *matrix[11][4][0] = 	(ukrFunction)gemm_NEON_11x4_b0_col_fp32;
+    *matrix[11][4][1] = 	(ukrFunction)gemm_NEON_11x4_b1_col_fp32;
+    *matrix[12][0][0] = 	(ukrFunction)NULL;
+    *matrix[12][0][1] = 	(ukrFunction)NULL;
+    *matrix[12][1][0] = 	(ukrFunction)gemm_NEON_12x1_b0_col_fp32;
+    *matrix[12][1][1] = 	(ukrFunction)gemm_NEON_12x1_b1_col_fp32;
+    *matrix[12][2][0] = 	(ukrFunction)gemm_NEON_12x2_b0_col_fp32;
+    *matrix[12][2][1] = 	(ukrFunction)gemm_NEON_12x2_b1_col_fp32;
+    *matrix[12][3][0] = 	(ukrFunction)gemm_NEON_12x3_b0_col_fp32;
+    *matrix[12][3][1] = 	(ukrFunction)gemm_NEON_12x3_b1_col_fp32;
+    *matrix[12][4][0] = 	(ukrFunction)gemm_NEON_12x4_b0_col_fp32;
+    *matrix[12][4][1] = 	(ukrFunction)gemm_NEON_12x4_b1_col_fp32;
+    *matrix[13][0][0] = 	(ukrFunction)NULL;
+    *matrix[13][0][1] = 	(ukrFunction)NULL;
+    *matrix[13][1][0] = 	(ukrFunction)gemm_NEON_13x1_b0_col_fp32;
+    *matrix[13][1][1] = 	(ukrFunction)gemm_NEON_13x1_b1_col_fp32;
+    *matrix[13][2][0] = 	(ukrFunction)gemm_NEON_13x2_b0_col_fp32;
+    *matrix[13][2][1] = 	(ukrFunction)gemm_NEON_13x2_b1_col_fp32;
+    *matrix[13][3][0] = 	(ukrFunction)gemm_NEON_13x3_b0_col_fp32;
+    *matrix[13][3][1] = 	(ukrFunction)gemm_NEON_13x3_b1_col_fp32;
+    *matrix[13][4][0] = 	(ukrFunction)gemm_NEON_13x4_b0_col_fp32;
+    *matrix[13][4][1] = 	(ukrFunction)gemm_NEON_13x4_b1_col_fp32;
+    *matrix[14][0][0] = 	(ukrFunction)NULL;
+    *matrix[14][0][1] = 	(ukrFunction)NULL;
+    *matrix[14][1][0] = 	(ukrFunction)gemm_NEON_14x1_b0_col_fp32;
+    *matrix[14][1][1] = 	(ukrFunction)gemm_NEON_14x1_b1_col_fp32;
+    *matrix[14][2][0] = 	(ukrFunction)gemm_NEON_14x2_b0_col_fp32;
+    *matrix[14][2][1] = 	(ukrFunction)gemm_NEON_14x2_b1_col_fp32;
+    *matrix[14][3][0] = 	(ukrFunction)gemm_NEON_14x3_b0_col_fp32;
+    *matrix[14][3][1] = 	(ukrFunction)gemm_NEON_14x3_b1_col_fp32;
+    *matrix[14][4][0] = 	(ukrFunction)gemm_NEON_14x4_b0_col_fp32;
+    *matrix[14][4][1] = 	(ukrFunction)gemm_NEON_14x4_b1_col_fp32;
+    *matrix[15][0][0] = 	(ukrFunction)NULL;
+    *matrix[15][0][1] = 	(ukrFunction)NULL;
+    *matrix[15][1][0] = 	(ukrFunction)gemm_NEON_15x1_b0_col_fp32;
+    *matrix[15][1][1] = 	(ukrFunction)gemm_NEON_15x1_b1_col_fp32;
+    *matrix[15][2][0] = 	(ukrFunction)gemm_NEON_15x2_b0_col_fp32;
+    *matrix[15][2][1] = 	(ukrFunction)gemm_NEON_15x2_b1_col_fp32;
+    *matrix[15][3][0] = 	(ukrFunction)gemm_NEON_15x3_b0_col_fp32;
+    *matrix[15][3][1] = 	(ukrFunction)gemm_NEON_15x3_b1_col_fp32;
+    *matrix[15][4][0] = 	(ukrFunction)gemm_NEON_15x4_b0_col_fp32;
+    *matrix[15][4][1] = 	(ukrFunction)gemm_NEON_15x4_b1_col_fp32;
+    *matrix[16][0][0] = 	(ukrFunction)NULL;
+    *matrix[16][0][1] = 	(ukrFunction)NULL;
+    *matrix[16][1][0] = 	(ukrFunction)gemm_NEON_16x1_b0_col_fp32;
+    *matrix[16][1][1] = 	(ukrFunction)gemm_NEON_16x1_b1_col_fp32;
+    *matrix[16][2][0] = 	(ukrFunction)gemm_NEON_16x2_b0_col_fp32;
+    *matrix[16][2][1] = 	(ukrFunction)gemm_NEON_16x2_b1_col_fp32;
+    *matrix[16][3][0] = 	(ukrFunction)gemm_NEON_16x3_b0_col_fp32;
+    *matrix[16][3][1] = 	(ukrFunction)gemm_NEON_16x3_b1_col_fp32;
+    *matrix[16][4][0] = 	(ukrFunction)gemm_NEON_16x4_b0_col_fp32;
+    *matrix[16][4][1] = 	(ukrFunction)gemm_NEON_16x4_b1_col_fp32;
+}
+
+
+void freeMatrix(ukrFunction**** matrix) {
+    for (int i = 0; i < 17; i++) {
+        for (int j = 0; j < 5; j++) {
+            for (int b = 0; b < 2; b++) {
+                free(matrix[i][j][b]);
+            }
+            free(matrix[i][j]);
+        }
+        free(matrix[i]);
+    }
+    free(matrix);
+}
+
+
